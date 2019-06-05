@@ -2,7 +2,6 @@
 for project 1
 
 
-=======
-Kim Graff
-Megan Gilpin
-Esther Lee
+Kim Graff  
+Megan Gilpin  
+Esther Lee  
