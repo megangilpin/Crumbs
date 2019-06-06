@@ -7,14 +7,20 @@
 
     <title>Crumbs</title>
 
+    <!--RESET-->
+    <link rel="stylesheet" href="reset.css">
+
     <!--BOOSTRAP-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!--CUSTOM CSS-->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 <!--Header / Navbar-->
 <nav class="navbar navbar-light" style="background-color: #A8D0E6;">
-    LOGO TO GO HERE and other links if we want
+    <img src="assets/logo.png" alt="logo"> <h1>Something here</h1> 
 </nav>
 
 <!--Start Body Container-->
@@ -24,17 +30,23 @@
         <!--diet box currently links meant for Pinterest recipes-->
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                  Dietary Requirements
+                <div class="card-header"  style="background-color: #A8D0E6;">
+                  <h3>Dietary Requirements</h3>
                 </div>
                 <!--TO DO: Add links to Pinterest search or something-->
                 <ul class="list-group list-group-flush">
-                  <a href="#"><li class="list-group-item">Vegan</li></a>
-                  <a href="#"><li class="list-group-item">Vegetarian</li></a>
-                  <a href="#"><li class="list-group-item">Kosher</li></a>
-                  <a href="#"><li class="list-group-item">Gluten Free</li></a>
-                  <a href="#"><li class="list-group-item">Peanut Free</li></a>
-                  <a href="#"><li class="list-group-item">Dairy Free</li></a>
+                  <li class="list-group-item">
+                    <a href="#">Vegan</a></li>
+                  <li class="list-group-item">
+                    <a href="#">Vegetarian</a></li>
+                  <li class="list-group-item">
+                    <a href="#">Kosher</a></li>
+                  <li class="list-group-item">
+                    <a href="#">Gluten Free</a></li>
+                  <li class="list-group-item">
+                    <a href="#">Peanut Free</a></li>
+                  <li class="list-group-item">
+                    <a href="#">Dairy Free</a></li>
                 </ul>
             </div>
         </div>
@@ -43,8 +55,8 @@
         <div class="col-12 col-md-8">
             <form>
                 <div class="form-group">
-                    <label for="ingredients">Add your ingredients below</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">Separate your ingredients with a comma</textarea>
+                    <h2><label for="ingredients">Add your ingredients below</label></h2>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10">Separate your ingredients with a comma</textarea>
                 </div>
                 <button type="submit" class="btn btn-outline-dark">Submit</button>
             </form>
@@ -56,8 +68,8 @@
             <!--Links to other pages-->
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                    <h5>I Give UP...</h5>
+                <div class="card-header" style="background-color: #A8D0E6;">
+                    <h3>I Give UP...</h3>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a href="https://www.seamless.com/">Seamless</a></li>
@@ -72,7 +84,7 @@
             <div class="col-12">
         
                 <div class="row justify-content-center">
-                    <h3 class="mb-3">List of Ingredients</h3>
+                    <h2 class="mb-3">List of Ingredients</h2>
                 </div>
         
                 <div class="row">
@@ -83,29 +95,27 @@
     </div>
 
         <!--Row to display recipes on page-->
-<div class="col-12">
-    <div class="row jumbotron my-3 mx-3">
-        <div class="col-12">
-            <div class="row justify-content-center">
-                <h3 class="mb-3">List of Recipes</h3>
-            </div>
-<!-- Div to display recipes on page -->
-            <div class="row d-flex flex-wrap">
+    <div class="col-12">
+        <div class="row jumbotron my-3 mx-3">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <h2 class="mb-3">List of Recipes</h2>
+                </div>
+    <!-- Div to display recipes on page -->
+                <div class="row d-flex flex-wrap">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-
-    
 </div> <!--End Body Container-->
 
-<!--FOOTER-->
-<footer class="footer mt-auto py-3">
-    <div class="container">
-      <span class="text-muted">CRUMBS (c) Team Repo // 2019</span>
+ <!--FOOTER-->
+<div class="footer mt-auto py-3">
+    <center>CRUMBS (c) Team Repo // 2019</center>
 </div>
-<!--END FOOTER-->
+  <!--END FOOTER-->
+
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
