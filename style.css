@@ -20,7 +20,7 @@ a:active {
 
 /* BODY ELEMENTS */
 body {
-    margin: auto;
+    /* margin: auto; */
 }
 
 .container {
@@ -31,5 +31,9 @@ body {
 
 /* FOOTER ELEMENTS */
 .footer {
+    padding: 10px;
+    width: 100%;
+    bottom: 0;
     background-color: #f5f5f5;
-  }
+    color: 	#24305e;
+}
