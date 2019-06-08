@@ -22,6 +22,11 @@ a:active {
 /* body {
 } */
 
+/* CURSOR */
+body {
+  cursor: url('assets/logo.png'), pointer;
+}
+
 .container {
     margin: auto;
     padding: 10px;
