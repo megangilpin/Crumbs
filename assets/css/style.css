@@ -19,8 +19,9 @@ a:active {
 }
 
 /* BODY ELEMENTS */
-/* body {
-} */
+body {
+  background: #fff url('../image/bg.png') repeat;
+}
 
 .container {
     margin: auto;
@@ -56,13 +57,6 @@ a:active {
 .jumbotron .container {
   position: relative;
   z-index: 2;
-}
-
-@media screen and (max-width: 768px) {
-  .jumbotron {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
 }
 
 .text-color {
@@ -112,4 +106,12 @@ a.action_link {
     bottom: 0;
     background-color: #f5f5f5;
     color: 	#24305e;
+}
+
+/*RESPONSIVE*/
+@media screen and (max-width: 768px) {
+  .jumbotron {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
