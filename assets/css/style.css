@@ -18,6 +18,12 @@ a:active {
   background-color: #a8d0e6;
 }
 
+/*NAV BAR*/
+#nav-link > a:link {
+  color: black;
+  font-size: 25px;
+}
+
 /* BODY ELEMENTS */
 body {
   background: #fff url('../image/bg.png') repeat;
