@@ -18,8 +18,11 @@
 </head>
 <body>
 <!--Header / Navbar-->
-<nav class="navbar navbar-light" style="background-color: #A8D0E6;">
-        <img src="assets/image/logo.png" alt="logo"> <h1>Take Me</h1> 
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #A8D0E6;">
+        <a href="index.html" target="_blank"><img src="assets/image/logo.png" alt="logo"></a> 
+
+        <h1>Take Me</h1> 
+        
 </nav>
 
 <!--Start Body Container-->
@@ -33,28 +36,27 @@
         </div>
 
         <!--Drop down menu with city names-->
-		<div class="row mx-auto well col-lg-12 mt-5">
-			<div class="col-xs-4 pr-0">
+		<div class="row mx-auto well col-lg-12 mt-5 justify-content-center">
+			<div class="col-xs-4 pr-0 mx-2 ">
 				<select id="selectId" class="form-control form-control-lg">
 					<option value="Select City" hidden>Select City</option>
-					<option value="1">New York City, NY</option>
-					<option value="2" >Long Island, NY</option>
-					<option value="3">Buffalo, NY</option>
-					<option value="4">Hudson Valley, NY</option>
-                    <option value="5">Hudson Valley, NY</option>
-                    <option value="6">Albany, New York, NY</option>
-                    <option value="7">Syracuse, NY</option>
-                    <option value="8">Rochester, New York, NY</option>
+					<option value="280">New York City</option>
+					<option value="280">Long Island</option>
+					<option value="1012">Buffalo</option>
+					<option value="1006">Hudson Valley</option>
+                    <option value="997">Albany</option>
+                    <option value="997">Syracuse</option>
+                    <option value="988">Rochester</option>
 				</select>
             </div>
             
             <!--where you can enter the cusine you crave -->
-			<div class="col-xs-6 pl-0 pr-0">
+			<div class="col-xs-6 pl-0 pr-0 mx-2">
 				<input id="getText" type="text" class="form-control" placeholder="Search Cuisine">
             </div>
 
             <!--search button-->
-				<button id = "getMessage" class = "btn btn-dark col-xs-2">Search</button>
+				<button id = "btnMessage" class = "btn btn-warning col-xs-2 mx-2">Search</button>
 		</div>
 	</div>
 </div>
