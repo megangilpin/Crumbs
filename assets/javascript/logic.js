@@ -8,6 +8,7 @@ var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
+var ingrArray = [];
 
 // Click handler for ingredients submit button
 $(".btn").on("click", function(e) {
@@ -25,14 +26,16 @@ $(".btn").on("click", function(e) {
 
   // List out searched ingredients
   // Save string of all ingredients in an array
-  var ingrArray = ingrSearch.split(',');
+  ingrArray = ingrSearch.split(',');
+
   console.log(ingrArray);
 
   // Create div and list out every ingredient
   for (i=0; i<ingrArray.length; i++) {
     var ingrDiv = $('<div/>', {
       text: ingrArray[i],
-      id: 'ingrDiv'+i
+      id: 'ingrDiv'+i,
+      value: ingrArray[i]
     });
     // Create span to delete
     var ingrSpan = $('<span/>', {
@@ -71,6 +74,7 @@ $(".btn").on("click", function(e) {
         var recipeAnchor = $("<a>");
         // Set src attribute of recipe URL to the anchor tag
         recipeAnchor.attr("href", response.hits[i].recipe.url);
+        recipeAnchor.attr("target", "_blank")
         console.log(response.hits[i].recipe.url); 
 
         // Append label and image to the div
@@ -92,9 +96,21 @@ $(".btn").on("click", function(e) {
 $(document).on("click", "#deleteIngr", function(e) {
   e.preventDefault();
   console.log(this);
+
+  // Grab removed ingredient and remove from array
+  var ingrVal = $(this).closest("div").val();
+  console.log (ingrVal);
+  var ingrPos = ingrArray.indexOf(ingrVal);
+  console.log(ingrPos);
+  ingrArray.splice(ingrPos, 1);
+  console.log(ingrArray);
+  
+  // Remove div of item
   $(this).closest("div").remove();
+
 });
 
 // TO DO: 
+// Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
