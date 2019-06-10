@@ -9,7 +9,7 @@
   <title>Crumbs</title>
 
   <!--RESET-->
-  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="reset.css">
 
   <!--BOOSTRAP-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -57,9 +57,9 @@
       <!--input form for pintrest search-->
       <div class="col-12 col-md-8">
         <form>
-          <div class="form-group"><h2><label>Inspire Me</label></h2>
-            <textarea class="form-control" id="inspoIdeas" rows="5"
-              placeholder="Insporation Search Word Goes Here"></textarea>
+          <div class="form-group"><h2><label>Teach Me</label></h2>
+            <textarea class="form-control" id="videoSearchWord" rows="5"
+              placeholder="Ask your question here."></textarea>
           </div>
           <button type="submit" class="btn btn-outline-dark">Submit</button>
         </form>
@@ -86,11 +86,10 @@
         <div class="row jumbotron">
           <div class="col-12">
             <div class="row justify-content-center">
-              <h2 class="mb-3">Food Porn</h2>
+              <h2 class="mb-3">Show Me How</h2>
             </div>
             <!-- Div to display recipes on page -->
-            <div class="inspoList row d-flex flex-wrap">
-            </div>
+            <div class="inspoList row d-flex flex-wrap" id="player">
           </div>
         </div>
       </div>
@@ -110,6 +109,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- JS file -->
   <script type="text/javascript" src="assets/javascript/youtube.js"></script>
+  <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
 
 </body>
 
