@@ -3,11 +3,29 @@
 // Example of an API query for ingredients chicken, mushrooms, garlic
 // https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
 
+// Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyDQtEqo93MUEgnY0AngvOsfshKbMH8ChA4",
+  authDomain: "crumbs-243103.firebaseapp.com",
+  databaseURL: "https://crumbs-243103.firebaseio.com",
+  projectId: "crumbs-243103",
+  storageBucket: "crumbs-243103.appspot.com",
+  messagingSenderId: "68338396052",
+  appId: "1:68338396052:web:2d602427a8bff86c"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
+var ingrArray = [];
+
 
 // Click handler for ingredients submit button
 $(".btn").on("click", function(e) {
@@ -19,14 +37,21 @@ $(".btn").on("click", function(e) {
   // Grab list of ingredients from user input
   ingrSearch = $("#ingredientList").val().trim();
   console.log(ingrSearch);
-
+  
   // Clear out text box
   $("#ingredientList").empty();
 
   // List out searched ingredients
   // Save string of all ingredients in an array
-  var ingrArray = ingrSearch.split(',');
-  console.log(ingrArray);
+  ingrArray = ingrSearch.split(',');
+  console.log(ingrArray)
+
+  // Adds ingrArray to the Firebase
+  database.ref().push({
+    ingrList: ingrArray,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
+  });
+  console.log("firebase fired")
 
   // Create div and list out every ingredient
   for (i=0; i<ingrArray.length; i++) {
@@ -98,3 +123,9 @@ $(document).on("click", "#deleteIngr", function(e) {
 // TO DO: 
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
+
+
+// ----------- Firebase logic ------------ 
+database.ref().on("child_added", function (child) {
+  console.log(child.val().ingrList)
+});
