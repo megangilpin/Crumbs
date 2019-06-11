@@ -69,15 +69,47 @@ $(".btn").on("click", function(e) {
     $("#fridgeIngredients").append(ingrDiv);
   };
 
+  // API call
+  callAPI(ingrSearch);
+});
+
+// Click handler for removing ingredient(s)
+$(document).on("click", "#deleteIngr", function(e) {
+  e.preventDefault();
+  console.log(this);
+
+  // Grab removed ingredient and remove from array
+  var ingrVal = $(this).closest("div").val().trim();
+  console.log (ingrVal);
+  var ingrPos = ingrArray.indexOf(ingrVal);
+  console.log(ingrPos);
+  ingrArray.splice(ingrPos, 1);
+  console.log(ingrArray);
+  
+  // Remove div of item
+  $(this).closest("div").remove();
+
+  ingrSearch = ingrArray.toString();
+  console.log(ingrSearch);
+
+  // Empty recipes div
+  $(".recipeList").empty;
+
+  // Recall API to retrieve recipes
+  callAPI(ingrSearch);
+});
+
+// Function to call API
+function callAPI(ingrSearch) {
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
-  // Ajax call to Edamam API to grab recipes
-  $.ajax({
-      url: newURL,
-      method: "GET"
+    // Ajax call to Edamam API to grab recipes
+    $.ajax({
+    url: newURL,
+    method: "GET"
     }).then(function(response) {
-      console.log(response);
+    console.log(response);
 
       // List each recipe
       var numRecipes = response.hits.length;
@@ -109,31 +141,11 @@ $(".btn").on("click", function(e) {
         // Adding the button to the HTML
         $(".recipeList").append(recipeAnchor);
       };
+    });
+};
 
-  });
-
-});
-
-// Click handler for removing ingredient(s)
-$(document).on("click", "#deleteIngr", function(e) {
-  e.preventDefault();
-  console.log(this);
-
-  // Grab removed ingredient and remove from array
-  var ingrVal = $(this).closest("div").val();
-  console.log (ingrVal);
-  var ingrPos = ingrArray.indexOf(ingrVal);
-  console.log(ingrPos);
-  ingrArray.splice(ingrPos, 1);
-  console.log(ingrArray);
-  
-  // Remove div of item
-  $(this).closest("div").remove();
-
-});
 
 // TO DO: 
-// Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
 
