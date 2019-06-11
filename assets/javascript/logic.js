@@ -142,3 +142,26 @@ $(document).on("click", "#deleteIngr", function(e) {
 database.ref().on("child_added", function (child) {
   console.log(child.val().ingrList)
 });
+
+// ----------- Firebase logic for landing page ------------ 
+
+//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
+      //  If there is a user, log out out user details for debugging purposes.
+// firebase.auth().onAuthStateChanged(function (user) {
+//   window.user = user
+// });
+
+// On click event for the Sign In button
+$(document).on("click", "#signIn", function (event) {
+  event.preventDefault();
+  var email = $("#email").val();
+  console.log(email);
+  var password = $("#password").val();
+  console.log(password);
+  var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+  console.log(credential)
+  var auth = firebase.auth();
+  var currentUser = auth.currentUser;
+
+
+});
