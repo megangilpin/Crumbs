@@ -1,63 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!--Header / Navbar-->
+<nav class="navbar navbar-expand-lg" style="background-color: #A8D0E6;">
+    <a class="navbar-brand" href="index.html"><img src="assets/image/logo.png" height='80' width='80'></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-
-  <!--RESET-->
-  <link rel="stylesheet" href="assets/css/reset.css">
-
-  <!--BOOSTRAP-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <!--CUSTOM CSS-->
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body class="landing">
-  <div class="container">
-    <div class="text-center my-5 mx-5">
-      <img src="assets/image/logo.png" alt="logo"><br>
-      <span class="tracking-in-expand">CRUMBS</span>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="takeout.html">Take Out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="youtube.html">Learn</a>
+        </li>
+      </ul>
     </div>
-
-    <div class="middle">
-      <div class="row">
-        <!-- Link to yelp API page -->
-        <div class="col-lg-6 col-md-6">
-            <a href="takeout.html">
-              <div class="box card">
-                <div class="card-body text-center">
-                  <h2>Take Me!</h2>
-                </div>
-              </div>
-            </a>
-        </div>
-
-        <!-- Link to Edamam API page -->
-        <div class="col-lg-6 col-md-6">
-            <a href="index.html">
-              <div class="box card">
-                <div class="card-body text-center">
-                  <h2>Feed Me!</h2>
-                </div>
-              </div>
-            </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- end of container -->
-  </div>
-
-  <script type="text/javascript" src="assets/javascript/zomato.js"></script>
-
-
-</body>
-
-</html>
+</nav>
