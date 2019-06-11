@@ -26,7 +26,6 @@ var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
 
-
 // Click handler for ingredients submit button
 $(".btn").on("click", function(e) {
   e.preventDefault();
