@@ -36,36 +36,38 @@ $(document).ready(function() {
    $.getJSON(settings, function(data) {
  
     data = data.restaurants;
-    var html = "";
+    var html = ""; //creating html variable for adding to the div
  
     $.each(data, function(index, value) {
  
      var x = data[index];
      $.each(x, function(index, value) {
-      var location = x.restaurant.location;
-      var userRating = x.restaurant.user_rating;
-      html += "<div class='data img-rounded'>"; //image
-      html += "<div class='rating'>"; //rating
- 
-      html += "<span title='" + userRating.rating_text + "'><p style='color:white;background-color:#" + userRating.rating_color + ";border-radius:4px;border:2px;padding:2px 10px 2px 10px;text-align: center;text-decoration:none;display:inline-block;font-size:16px;float:right;'><strong>" + userRating.aggregate_rating + "</strong></p></span><br>"; //box with all info
+        var location = x.restaurant.location;
+        var userRating = x.restaurant.user_rating;
 
-      html += "  <strong class='text-info'>" + userRating.votes + " votes</strong>";
+//adding html to the html var
+        html += "<div class='data img-rounded'>"; //image
+        html += "<div class='rating'>"; //rating
 
-      html += "</div>";
+        html += "<span title='" + userRating.rating_text + "'> <p style='color:white;background-color:#" + userRating.rating_color + ";border-radius:4px;border:2px;padding:2px 10px 2px 10px;text-align: center;text-decoration:none;display:inline-block;font-size:16px;float:right;'> <strong>" + userRating.aggregate_rating + "</strong></p></span><br>"; //box with all info
 
-      html += "<img class='resimg img-rounded' src=" + value.thumb + " alt='Restaurant Image' height='185' width='185'>";
+        html += "  <strong class='text-info'>" + userRating.votes + " votes</strong>";
 
-      html += "<a href=" + value.url + " target='_blank' class='action_link'><h2 style='color:navy;'><strong>" + value.name + "</strong></h2></a>";
+        html += "</div>";
 
-      html += "  <strong class='text-primary'>" + location.locality + "</strong><br>";
+        html += "<img class='resimg img-round' src=" + value.thumb + " alt='Restaurant Image' height='165' width='165'>";
 
-      html += "  <h6 style='color:grey;'><strong>" + location.address + "</strong></h6><hr>";
+        html += "<a href=" + value.url + " target='_blank' class='action_link'><h2 style='color:navy;'><strong>" + value.name + "</strong></h2></a>";
 
-      html += "  <strong>CUISINES</strong>: " + value.cuisines + "<br>";
+        html += "  <strong class='text-primary'>" + location.locality + "</strong><br>";
 
-      html += "  <strong>COST FOR TWO</strong>: " + value.currency + value.average_cost_for_two + "<br>";
+        html += " <span>" + location.address + "</span><br><br>";
 
-      html += "</div><br>";
+        html += "  <strong>CUISINES</strong>: " + value.cuisines + "<br>";
+
+        html += "  <strong>COST FOR TWO</strong>: " + value.currency + value.average_cost_for_two + "<br>";
+
+        html += "</div><br>";
 
      });
     });
