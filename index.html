@@ -34,41 +34,54 @@
 <div class="container">
     <!--Row with diet box & input form-->
     <div class="row my-3 mx-3"> 
-        <!--diet box currently links meant for Pinterest recipes-->
+        <!--input form for ingredients-->
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
-                <div class="card-header"  style="background-color: #A8D0E6;">
-                  <h3>Dietary Requirements</h3>
+              <form>
+                <div class="form-group">
+                    <div class="card-header"  style="background-color: #A8D0E6;">
+                      <h2><label for="ingredients">What's in Your Fridge?</label></h2>
+                    </div>
+                    <textarea class="form-control" id="ingredientList" rows="5" placeholder="Separate your ingredients with a comma"></textarea>
                 </div>
-                <!--TO DO: Add links to Pinterest search or something-->
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <a href="#">Vegan</a></li>
-                  <li class="list-group-item">
-                    <a href="#">Vegetarian</a></li>
-                  <li class="list-group-item">
-                    <a href="#">Kosher</a></li>
-                  <li class="list-group-item">
-                    <a href="#">Gluten Free</a></li>
-                  <li class="list-group-item">
-                    <a href="#">Peanut Free</a></li>
-                  <li class="list-group-item">
-                    <a href="#">Dairy Free</a></li>
-                </ul>
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
+              </form>
+
+              <!-- Dietary Requirements -->
+              <!-- <div class="card-header"  style="background-color: #A8D0E6;">
+                  <h3>Dietary Requirements</h3>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="#">Vegan</a></li>
+                <li class="list-group-item">
+                  <a href="#">Vegetarian</a></li>
+                <li class="list-group-item">
+                  <a href="#">Kosher</a></li>
+                <li class="list-group-item">
+                  <a href="#">Gluten Free</a></li>
+                <li class="list-group-item">
+                  <a href="#">Peanut Free</a></li>
+                <li class="list-group-item">
+                  <a href="#">Dairy Free</a></li>
+              </ul> -->
             </div>
         </div>
 
-        <!--input form for ingredients-->
         <div class="col-12 col-md-8">
-            <form>
-                <div class="form-group">
-                    <h2><label for="ingredients">Add your ingredients below</label></h2>
-                        <textarea class="form-control" id="ingredientList" rows="10" placeholder="Separate your ingredients with a comma"></textarea>
+          <!-- Displays list of Ingredients in Fridge -->
+          <div class="row jumbotron p-4">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <h2 class="mb-3">List of Ingredients</h2>
                 </div>
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
-            </form>
+                <div class="row">
+                    <div id="fridgeIngredients"></div>
+                </div>
+            </div>
+          </div>
         </div>
-    </div> 
+    </div>
 
     <!--Row for ingredients list & links to another page-->
     <div class="row my-3 mx-3"> 
@@ -76,17 +89,16 @@
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
                 <div class="card-header" style="background-color: #A8D0E6;">
-                    <h3>I Give UP...</h3>
+                    <h3>Save for Later</h3>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="https://www.yelp.com/">Take Me</a></li>
-                    <li class="list-group-item"><a href="https://www.pinterest.com/">Inspire Me</a></li>
-                    <li class="list-group-item"><a href="https://www.youtube.com/">Teach Me</a></li>
+                    <li class="list-group-item">Food 1</li>
+                    <li class="list-group-item">Food 2</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Displays list of Ingredients in Fridge -->
+        <!-- Displays list of Ingredients in Fridge
         <div class="col-12 col-md-8">
         <div class="row jumbotron p-4">
             <div class="col-12">
@@ -98,23 +110,21 @@
                 </div>
             </div>
         </div>
-        </div>
-    </div>
+        </div> -->
 
     <!--Row to display recipes on page-->
-    <div class="col-12">
-        <div class="row jumbotron my-3 mx-3">
-            <div class="col-12">
-                <div class="row justify-content-center">
-                    <h2 class="mb-3">List of Recipes</h2>
-                </div>
-            <!-- Div to display recipes on page -->
-                <div class="recipeList row d-flex flex-wrap">
-                </div>
+    <!-- <div class="col-12"></div> -->
+        <!-- <div class="row jumbotron my-3 mx-3"></div> -->
+        <div class="col-12 col-md-8">
+            <div class="row jumbotron justify-content-center">
+                <h2 class="mb-3">Voila!</h2>
+            </div>
+        <!-- Div to display recipes on page -->
+            <div class="row recipeList row d-flex flex-wrap">
             </div>
         </div>
-    </div>
-
+  </div>
+  
 </div> <!--End Body Container-->
 
  <!--FOOTER-->
