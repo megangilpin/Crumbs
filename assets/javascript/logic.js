@@ -56,7 +56,8 @@ $(".btn").on("click", function(e) {
   for (i=0; i<ingrArray.length; i++) {
     var ingrDiv = $('<div/>', {
       text: ingrArray[i],
-      id: 'ingrDiv'+i
+      id: 'ingrDiv'+i,
+      value: ingrArray[i]
     });
     // Create span to delete
     var ingrSpan = $('<span/>', {
@@ -95,6 +96,7 @@ $(".btn").on("click", function(e) {
         var recipeAnchor = $("<a>");
         // Set src attribute of recipe URL to the anchor tag
         recipeAnchor.attr("href", response.hits[i].recipe.url);
+        recipeAnchor.attr("target", "_blank")
         console.log(response.hits[i].recipe.url); 
 
         // Append label and image to the div
@@ -116,10 +118,22 @@ $(".btn").on("click", function(e) {
 $(document).on("click", "#deleteIngr", function(e) {
   e.preventDefault();
   console.log(this);
+
+  // Grab removed ingredient and remove from array
+  var ingrVal = $(this).closest("div").val();
+  console.log (ingrVal);
+  var ingrPos = ingrArray.indexOf(ingrVal);
+  console.log(ingrPos);
+  ingrArray.splice(ingrPos, 1);
+  console.log(ingrArray);
+  
+  // Remove div of item
   $(this).closest("div").remove();
+
 });
 
 // TO DO: 
+// Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
 
@@ -127,4 +141,27 @@ $(document).on("click", "#deleteIngr", function(e) {
 // ----------- Firebase logic ------------ 
 database.ref().on("child_added", function (child) {
   console.log(child.val().ingrList)
+});
+
+// ----------- Firebase logic for landing page ------------ 
+
+//  If no user, sign in anonymously with firebase.auth().signInAnonymously()
+      //  If there is a user, log out out user details for debugging purposes.
+// firebase.auth().onAuthStateChanged(function (user) {
+//   window.user = user
+// });
+
+// On click event for the Sign In button
+$(document).on("click", "#signIn", function (event) {
+  event.preventDefault();
+  var email = $("#email").val();
+  console.log(email);
+  var password = $("#password").val();
+  console.log(password);
+  var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+  console.log(credential)
+  var auth = firebase.auth();
+  var currentUser = auth.currentUser;
+
+
 });
