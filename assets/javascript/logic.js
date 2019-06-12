@@ -50,7 +50,7 @@ $(".btn").on("click", function(e) {
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
-  console.log("firebase fired")
+  // console.log("firebase fired")
 
   // Create div and list out every ingredient
   for (i=0; i<ingrArray.length; i++) {
@@ -59,10 +59,12 @@ $(".btn").on("click", function(e) {
       id: 'ingrDiv'+i,
       value: ingrArray[i]
     });
+
     // Create span to delete
     var ingrSpan = $('<span/>', {
       text: 'x',
-      id: 'deleteIngr'
+      id: 'deleteIngr',
+      value: ingrArray[i],
     });
     // Append span to div
     ingrDiv.append(ingrSpan);
@@ -73,19 +75,17 @@ $(".btn").on("click", function(e) {
   callAPI(ingrSearch);
 });
 
-// Click handler for removing ingredient(s)
-$(document).on("click", "#deleteIngr", function(e) {
+$(document).on("click", "#deleteIngr", function (e) {
   e.preventDefault();
-  console.log(this);
 
   // Grab removed ingredient and remove from array
-  var ingrVal = $(this).closest("div").val().trim();
-  console.log (ingrVal);
+  var ingrVal = $(this).closest("div").attr("value");
+  console.log(ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
   console.log(ingrPos);
   ingrArray.splice(ingrPos, 1);
   console.log(ingrArray);
-  
+
   // Remove div of item
   $(this).closest("div").remove();
 
@@ -152,7 +152,7 @@ function callAPI(ingrSearch) {
 
 // ----------- Firebase logic ------------ 
 database.ref().on("child_added", function (child) {
-  console.log(child.val().ingrList)
+  // console.log(child.val().ingrList)
 });
 
 // ----------- Firebase logic for landing page ------------ 
