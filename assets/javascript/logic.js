@@ -97,7 +97,7 @@ $(".ingrSubmit").on("click", function(e) {
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
-  console.log("firebase fired")
+  // console.log("firebase fired")
 
   // Create div and list out every ingredient
   for (i=0; i<ingrArray.length; i++) {
@@ -106,16 +106,48 @@ $(".ingrSubmit").on("click", function(e) {
       id: 'ingrDiv'+i,
       value: ingrArray[i]
     });
+
     // Create span to delete
     var ingrSpan = $('<span/>', {
       text: 'x',
-      id: 'deleteIngr'
+      id: 'deleteIngr',
+      value: ingrArray[i],
     });
     // Append span to div
     ingrDiv.append(ingrSpan);
     $("#fridgeIngredients").append(ingrDiv);
   };
 
+  // API call
+  callAPI(ingrSearch);
+});
+
+$(document).on("click", "#deleteIngr", function (e) {
+  e.preventDefault();
+
+  // Grab removed ingredient and remove from array
+  var ingrVal = $(this).closest("div").attr("value");
+  console.log(ingrVal);
+  var ingrPos = ingrArray.indexOf(ingrVal);
+  console.log(ingrPos);
+  ingrArray.splice(ingrPos, 1);
+  console.log(ingrArray);
+
+  // Remove div of item
+  $(this).closest("div").remove();
+
+  ingrSearch = ingrArray.toString();
+  console.log(ingrSearch);
+
+  // Empty recipes div
+  $(".recipeList").empty;
+
+  // Recall API to retrieve recipes
+  callAPI(ingrSearch);
+});
+
+// Function to call API
+function callAPI(ingrSearch) {
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
@@ -198,3 +230,17 @@ database.ref().on("child_added", function (child) {
 //   window.user = user
 // });
 
+// On click event for the Sign In button
+$(document).on("click", "#signIn", function (event) {
+  event.preventDefault();
+  var email = $("#email").val();
+  console.log(email);
+  var password = $("#password").val();
+  console.log(password);
+  var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+  console.log(credential)
+  var auth = firebase.auth();
+  var currentUser = auth.currentUser;
+
+
+});
