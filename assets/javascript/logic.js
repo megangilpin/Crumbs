@@ -167,7 +167,7 @@ $(document).on("click", "#deleteIngr", function(e) {
   console.log(this);
 
   // Grab removed ingredient and remove from array
-  var ingrVal = $(this).closest("div").val();
+  var ingrVal = $(this).closest("div").attr("value");
   console.log (ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
   console.log(ingrPos);
