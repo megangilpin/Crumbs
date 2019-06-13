@@ -3,7 +3,6 @@
 // Example of an API query for ingredients chicken, mushrooms, garlic
 // https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
 
-// Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyDQtEqo93MUEgnY0AngvOsfshKbMH8ChA4",
   authDomain: "crumbs-243103.firebaseapp.com",
@@ -13,11 +12,11 @@ var firebaseConfig = {
   messagingSenderId: "68338396052",
   appId: "1:68338396052:web:2d602427a8bff86c"
 };
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
+
 
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
@@ -34,7 +33,7 @@ $(document).on("click", "#signIn", function (event) {
   console.log(email);
   var password = $("#password").val();
   console.log(password);
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode)
@@ -49,8 +48,7 @@ $(document).on("click", "#signUpBtn", function (event) {
   var password = $("#newUserPassword").val();
   console.log(password);
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-  .catch(function (error) {
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -63,12 +61,10 @@ $(document).on("click", "#signUpBtn", function (event) {
     console.log(error);
     // document.getElementById('quickstart-sign-in').disabled = false;
     // [END_EXCLUDE]
-    // Gets current firebase user
   });
 });
 
-var user = firebase.auth().currentUser;
-    console.log(user);
+
 // Sign Out Function
 $(document).on("click", "#signOut", function(event){
 event.preventDefault();
@@ -78,7 +74,7 @@ console.log("user signed out")
 
 
 // Click handler for ingredients submit button
-$(".submitIngrBtn").on("click", function(e) {
+$(".ingrSubmit").on("click", function(e) {
   e.preventDefault();
 
   // Clear out previous list of ingredients
@@ -96,14 +92,6 @@ $(".submitIngrBtn").on("click", function(e) {
   ingrArray = ingrSearch.split(',');
   console.log(ingrArray)
 
-  // Gets current firebase user
-  var user = firebase.auth().currentUser;
-  console.log(user);
-  var uid;
-  if (user != null) {
-    uid = user.uid;
-  }
-    console.log("user" + uid)
   // Adds ingrArray to the Firebase
   database.ref().push({
     ingrList: ingrArray,
@@ -177,12 +165,12 @@ function runRecipes(ingrSearch) {
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
-    // Ajax call to Edamam API to grab recipes
-    $.ajax({
-    url: newURL,
-    method: "GET"
+  // Ajax call to Edamam API to grab recipes
+  $.ajax({
+      url: newURL,
+      method: "GET"
     }).then(function(response) {
-    console.log(response);
+      console.log(response);
 
       // List each recipe
       var numRecipes = response.hits.length;
@@ -225,11 +213,31 @@ function runRecipes(ingrSearch) {
         // Adding the button to the HTML
         $(".recipeList").append(recipeAnchor);
       };
-    });
-};
 
+  });
+
+});
+
+// Click handler for removing ingredient(s)
+$(document).on("click", "#deleteIngr", function(e) {
+  e.preventDefault();
+  console.log(this);
+
+  // Grab removed ingredient and remove from array
+  var ingrVal = $(this).closest("div").attr("value");
+  console.log (ingrVal);
+  var ingrPos = ingrArray.indexOf(ingrVal);
+  console.log(ingrPos);
+  ingrArray.splice(ingrPos, 1);
+  console.log(ingrArray);
+  
+  // Remove div of item
+  $(this).closest("div").remove();
+
+});
 
 // TO DO: 
+// Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
 
@@ -244,8 +252,6 @@ database.ref().on("child_added", function (child) {
       //  If there is a user, log out out user details for debugging purposes.
 // firebase.auth().onAuthStateChanged(function (user) {
 //   window.user = user
-
-// });
 // });
 
 // On click event for the Sign In button
@@ -262,4 +268,3 @@ $(document).on("click", "#signIn", function (event) {
 
 
 });
-
