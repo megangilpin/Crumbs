@@ -97,6 +97,9 @@ $(".ingrSubmit").on("click", function(e) {
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
+  
+  console.log("firebase fired")
+
   // console.log("firebase fired")
 
   // Create div and list out every ingredient
@@ -106,6 +109,11 @@ $(".ingrSubmit").on("click", function(e) {
       id: 'ingrDiv'+i,
       value: ingrArray[i]
     });
+
+    // Create span to delete
+    var ingrSpan = $('<span/>', {
+      text: 'x',
+      id: 'deleteIngr'
 
     // Create span to delete
     var ingrSpan = $('<span/>', {
@@ -147,8 +155,13 @@ $(document).on("click", "#deleteIngr", function (e) {
   runRecipes(ingrSearch);
 });
 
+
+// Function to call API
+function callAPI(ingrSearch) {
+
 // Function to call API & run recipes
 function runRecipes(ingrSearch) {
+  
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
