@@ -109,7 +109,10 @@ $(".submitIngrBtn").on("click", function(e) {
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
+  
   console.log("firebase fired")
+
+  // console.log("firebase fired")
 
   // Create div and list out every ingredient
   for (i=0; i<ingrArray.length; i++) {
@@ -118,6 +121,11 @@ $(".submitIngrBtn").on("click", function(e) {
       id: 'ingrDiv'+i,
       value: ingrArray[i]
     });
+
+    // Create span to delete
+    var ingrSpan = $('<span/>', {
+      text: 'x',
+      id: 'deleteIngr'
 
     // Create span to delete
     var ingrSpan = $('<span/>', {
@@ -159,8 +167,13 @@ $(document).on("click", "#deleteIngr", function (e) {
   runRecipes(ingrSearch);
 });
 
+
+// Function to call API
+function callAPI(ingrSearch) {
+
 // Function to call API & run recipes
 function runRecipes(ingrSearch) {
+  
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
@@ -231,4 +244,22 @@ database.ref().on("child_added", function (child) {
       //  If there is a user, log out out user details for debugging purposes.
 // firebase.auth().onAuthStateChanged(function (user) {
 //   window.user = user
+
 // });
+// });
+
+// On click event for the Sign In button
+$(document).on("click", "#signIn", function (event) {
+  event.preventDefault();
+  var email = $("#email").val();
+  console.log(email);
+  var password = $("#password").val();
+  console.log(password);
+  var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+  console.log(credential)
+  var auth = firebase.auth();
+  var currentUser = auth.currentUser;
+
+
+});
+
