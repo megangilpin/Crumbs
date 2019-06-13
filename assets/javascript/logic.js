@@ -113,11 +113,6 @@ $(".ingrSubmit").on("click", function(e) {
     // Create span to delete
     var ingrSpan = $('<span/>', {
       text: 'x',
-      id: 'deleteIngr'
-
-    // Create span to delete
-    var ingrSpan = $('<span/>', {
-      text: 'x',
       id: 'deleteIngr',
       value: ingrArray[i],
     });
@@ -154,10 +149,6 @@ $(document).on("click", "#deleteIngr", function (e) {
   // Recall API to retrieve recipes
   runRecipes(ingrSearch);
 });
-
-
-// Function to call API
-function callAPI(ingrSearch) {
 
 // Function to call API & run recipes
 function runRecipes(ingrSearch) {
@@ -216,7 +207,7 @@ function runRecipes(ingrSearch) {
 
   });
 
-});
+};
 
 // Click handler for removing ingredient(s)
 $(document).on("click", "#deleteIngr", function(e) {
