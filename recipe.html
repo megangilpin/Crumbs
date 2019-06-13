@@ -8,6 +8,9 @@
     <!-- Firebase References -->
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <!-- firebase Auth file -->
+    <script defer src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+
     <!--RESET-->
     <link rel="stylesheet" href="assets/css/reset.css">
     <!--BOOSTRAP-->
@@ -53,30 +56,14 @@
                     </div>
                     <textarea class="form-control" id="ingredientList" rows="5" placeholder="Separate your ingredients with a comma"></textarea>
                 </div>
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
+                <button type="submit" class="btn ingrSubmit btn-outline-dark">Submit</button>
               </form>
-              <!-- Dietary Requirements -->
-              <!-- <div class="card-header"  style="background-color: #A8D0E6;">
-                  <h3>Dietary Requirements</h3>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <a href="#">Vegan</a></li>
-                <li class="list-group-item">
-                  <a href="#">Vegetarian</a></li>
-                <li class="list-group-item">
-                  <a href="#">Kosher</a></li>
-                <li class="list-group-item">
-                  <a href="#">Gluten Free</a></li>
-                <li class="list-group-item">
-                  <a href="#">Peanut Free</a></li>
-                <li class="list-group-item">
-                  <a href="#">Dairy Free</a></li>
-              </ul> -->
             </div>
         </div>
+
+        <!-- Displays list of Ingredients in Fridge -->
         <div class="col-12 col-md-8">
-          <!-- Displays list of Ingredients in Fridge -->
+
           <div class="row jumbotron p-4">
             <div class="col-12">
                 <div class="row justify-content-center">
@@ -89,6 +76,7 @@
           </div>
         </div>
     </div>
+
     <!--Row for ingredients list & links to another page-->
     <div class="row my-3 mx-3"> 
         <!--Links to other pages-->
@@ -103,22 +91,7 @@
                 </ul>
             </div>
         </div>
-        <!-- Displays list of Ingredients in Fridge
-        <div class="col-12 col-md-8">
-        <div class="row jumbotron p-4">
-            <div class="col-12">
-                <div class="row justify-content-center">
-                    <h2 class="mb-3">List of Ingredients</h2>
-                </div>
-                <div class="row">
-                    <div id="fridgeIngredients"></div>
-                </div>
-            </div>
-        </div>
-        </div> -->
-    <!--Row to display recipes on page-->
-    <!-- <div class="col-12"></div> -->
-        <!-- <div class="row jumbotron my-3 mx-3"></div> -->
+
         <div class="col-12 col-md-8">
             <div class="row jumbotron justify-content-center">
                 <h2 class="mb-3">Voila!</h2>
@@ -126,6 +99,7 @@
             <div class="row recipeList row d-flex flex-wrap">
             </div>
         </div>
+    </div>
   </div>
   
 </div> <!--End Body Container-->
