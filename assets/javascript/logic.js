@@ -94,13 +94,15 @@ $(".ingrSubmit").on("click", function(e) {
     var ingrDiv = $('<div/>', {
       text: ingrArray[i],
       id: 'ingrDiv'+i,
+      class: 'list-item',
       value: ingrArray[i]
     });
 
     // Create span to delete
     var ingrSpan = $('<span/>', {
-      text: 'x',
+      text: 'X',
       id: 'deleteIngr',
+      class: 'list-delete-btn',
       value: ingrArray[i],
     });
     // Append span to div
