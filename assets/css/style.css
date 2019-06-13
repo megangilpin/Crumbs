@@ -170,10 +170,11 @@ h6 {
 .list-item {
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
-  width: 500px;
+  width: 600px;
   height: 45px;
   padding: 10px;
   margin: 10px;
+  margin-left: 40px;
   text-align: center;
 }
 
