@@ -120,19 +120,20 @@ function runRecipes(ingrSearch) {
         // Create div to dynamically list recipes
         var recipeDiv = $("<div>");
         // Label tag for recipes
-        var recipeLabel = $("<p>").text(response.hits[i].recipe.label);
+        var recipeLabel = $("<h3>").text(response.hits[i].recipe.label);
         // Image tag for recipes
-        var recipeImg = $("<img>");
+        var recipeImg = $("<img class='resimg img-round'>");
         recipeImg.attr("src",response.hits[i].recipe.image);
 
         // List ingredients  
         var getIngr = response.hits[i].recipe.ingredientLines;      
-        var ingrListArray = getIngr.split(',');
-        console.log(ingrListArray);
+        // var ingrListArray = getIngr.split(',');
+        // console.log(ingrListArray);
 
-          for (var j = 0; j < ingrListArray.length; j++) {
-            var recipeIngrs = $("<span>").text("Ingredients: " + ingrListArray[j]);
-          };
+        var recipeIngrs = $("<span>").text("Ingredients: " + getIngr);
+          // for (var j = 0; j < ingrListArray.length; j++) {
+          //   var recipeIngrs = $("<ul>").text("Ingredients: " + getIngr);
+          // };
 
         // Create anchor tag for the recipeDiv
         var recipeAnchor = $("<a>");
