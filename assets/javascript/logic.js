@@ -119,9 +119,10 @@ $(".ingrSubmit").on("click", function(e) {
   };
 
   // API call
-  callAPI(ingrSearch);
+  runRecipes(ingrSearch);
 });
 
+// Click handler to delete ingredients
 $(document).on("click", "#deleteIngr", function (e) {
   e.preventDefault();
 
@@ -143,11 +144,11 @@ $(document).on("click", "#deleteIngr", function (e) {
   $(".recipeList").empty;
 
   // Recall API to retrieve recipes
-  callAPI(ingrSearch);
+  runRecipes(ingrSearch);
 });
 
-// Function to call API
-function callAPI(ingrSearch) {
+// Function to call API & run recipes
+function runRecipes(ingrSearch) {
   // Construct new query string with user inputs
   var newURL = baseQuery + ingrSearch + "&app_id=" + appId + "&app_key=" + apiKey;
 
@@ -166,10 +167,20 @@ function callAPI(ingrSearch) {
         // Create div to dynamically list recipes
         var recipeDiv = $("<div>");
         // Label tag for recipes
-        var recipeLabel = $("<p>").text(response.hits[i].recipe.label);
+        var recipeLabel = $("<h3>").text(response.hits[i].recipe.label);
         // Image tag for recipes
-        var recipeImg = $("<img>");
+        var recipeImg = $("<img class='resimg img-round'>");
         recipeImg.attr("src",response.hits[i].recipe.image);
+
+        // List ingredients  
+        var getIngr = response.hits[i].recipe.ingredientLines;      
+        // var ingrListArray = getIngr.split(',');
+        // console.log(ingrListArray);
+
+        var recipeIngrs = $("<span>").text("Ingredients: " + getIngr);
+          // for (var j = 0; j < ingrListArray.length; j++) {
+          //   var recipeIngrs = $("<ul>").text("Ingredients: " + getIngr);
+          // };
 
         // Create anchor tag for the recipeDiv
         var recipeAnchor = $("<a>");
@@ -178,9 +189,10 @@ function callAPI(ingrSearch) {
         recipeAnchor.attr("target", "_blank")
         console.log(response.hits[i].recipe.url); 
 
-        // Append label and image to the div
+        // Append label, image, ingredients to the recipe div
         recipeDiv.append(recipeLabel);
         recipeDiv.append(recipeImg);
+        recipeDiv.append(recipeIngrs);
         
         // Append div recipeDiv to the recipeAnchor
         recipeAnchor.append(recipeDiv);
@@ -215,7 +227,6 @@ $(document).on("click", "#deleteIngr", function(e) {
 // Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
-
 
 // ----------- Firebase logic ------------ 
 database.ref().on("child_added", function (child) {
