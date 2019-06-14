@@ -70,21 +70,23 @@ $(".ingrSubmit").on("click", function(e) {
 
   // console.log("firebase fired")
 
-  // Create div and list out every ingredient
-  for (i=0; i<ingrArray.length; i++) {
-    var ingrDiv = $('<div/>', {
-      text: ingrArray[i],
-      id: 'ingrDiv'+i,
-      value: ingrArray[i]
-    });
+// Create div and list out every ingredient
+for (i=0; i<ingrArray.length; i++) {
+  var ingrDiv = $('<div/>', {
+    text: ingrArray[i],
+    id: 'ingrDiv'+i,
+    class: 'list-item',
+    value: ingrArray[i]
+  });
 
-    // Create span to delete
-    var ingrSpan = $('<span/>', {
-      text: 'x',
-      id: 'deleteIngr',
-      value: ingrArray[i],
-    });
-    // Append span to div
+  // Create span to delete
+  var ingrSpan = $('<span/>', {
+    text: 'X',
+    id: 'deleteIngr',
+    class: 'list-delete-btn',
+    value: ingrArray[i],
+  });
+  // Append span to div
     ingrDiv.append(ingrSpan);
     $("#fridgeIngredients").append(ingrDiv);
   };
