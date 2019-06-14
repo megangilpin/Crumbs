@@ -3,21 +3,6 @@
 // Example of an API query for ingredients chicken, mushrooms, garlic
 // https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDQtEqo93MUEgnY0AngvOsfshKbMH8ChA4",
-  authDomain: "crumbs-243103.firebaseapp.com",
-  databaseURL: "https://crumbs-243103.firebaseio.com",
-  projectId: "crumbs-243103",
-  storageBucket: "crumbs-243103.appspot.com",
-  messagingSenderId: "68338396052",
-  appId: "1:68338396052:web:2d602427a8bff86c"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-var database = firebase.database();
-
-
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
@@ -25,21 +10,22 @@ var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
 
-var currentUserId;
-
 
 // --------firebase logic for user----------
 // On click event for the Sign In button
 $(document).on("click", "#signUpBtn", function (event) {
   event.preventDefault();
   newUserSignUp()
+  $("#newUserEmail").val("");
+  $("#newUserPassword").val("");
 });
 
 $(document).on("click", "#signIn", function (event) {
   event.preventDefault();
   userSignIn()
+  $("#email").val("");
+  $("#password").val("");
 });
-
 
 // Sign Out Function
 $(document).on("click", "#signOut", function(event){
@@ -47,7 +33,6 @@ event.preventDefault();
 firebase.auth().signOut();
 console.log("user signed out")
 })
-
 
 // Click handler for ingredients submit button
 $(".ingrSubmit").on("click", function(e) {
@@ -58,7 +43,7 @@ $(".ingrSubmit").on("click", function(e) {
 
   // Grab list of ingredients from user input
   ingrSearch = $("#ingredientList").val().trim();
-  console.log("ingrSearch " + ingrSearch);
+  console.log(ingrSearch);
   
   // Clear out text box
   $("#ingredientList").empty();
@@ -66,46 +51,42 @@ $(".ingrSubmit").on("click", function(e) {
   // List out searched ingredients
   // Save string of all ingredients in an array
   ingrArray = ingrSearch.split(',');
-  console.log("ingrArray " + ingrArray)
+  console.log(ingrArray)
 
   // Gets current firebase user
   var user = firebase.auth().currentUser;
-  console.log(user);
   var uid;
   if (user != null) {
     uid = user.uid;
   }
-  console.log("user" + uid)
  
   // Adds ingrArray to the Firebase
-  database.ref().push({
+  firebase.database().ref('user-ingrList/' + uid).push({
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
-
-  // console.log("ingrList Firebase " + ingrList)
   
   console.log("firebase fired")
 
   // console.log("firebase fired")
 
-  // Create div and list out every ingredient
-  for (i=0; i<ingrArray.length; i++) {
-    var ingrDiv = $('<div/>', {
-      text: ingrArray[i],
-      id: 'ingrDiv'+i,
-      class: 'list-item',
-      value: ingrArray[i]
-    });
+// Create div and list out every ingredient
+for (i=0; i<ingrArray.length; i++) {
+  var ingrDiv = $('<div/>', {
+    text: ingrArray[i],
+    id: 'ingrDiv'+i,
+    class: 'list-item',
+    value: ingrArray[i]
+  });
 
-    // Create span to delete
-    var ingrSpan = $('<span/>', {
-      text: 'X',
-      id: 'deleteIngr',
-      class: 'list-delete-btn',
-      value: ingrArray[i],
-    });
-    // Append span to div
+  // Create span to delete
+  var ingrSpan = $('<span/>', {
+    text: 'X',
+    id: 'deleteIngr',
+    class: 'list-delete-btn',
+    value: ingrArray[i],
+  });
+  // Append span to div
     ingrDiv.append(ingrSpan);
     $("#fridgeIngredients").append(ingrDiv);
   };
@@ -120,17 +101,17 @@ $(document).on("click", "#deleteIngr", function (e) {
 
   // Grab removed ingredient and remove from array
   var ingrVal = $(this).closest("div").attr("value");
-  console.log("ingrVal " + ingrVal);
+  console.log(ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
-  console.log("ingrPos " + ingrPos);
+  console.log(ingrPos);
   ingrArray.splice(ingrPos, 1);
-  console.log("ingrArray" + ingrArray);
+  console.log(ingrArray);
 
   // Remove div of item
   $(this).closest("div").remove();
 
   ingrSearch = ingrArray.toString();
-  console.log("ingrSearch " + ingrSearch);
+  console.log(ingrSearch);
 
   // Empty recipes div
   $(".recipeList").empty;
@@ -220,86 +201,4 @@ $(document).on("click", "#deleteIngr", function(e) {
 // Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
-
-// ----------- Firebase logic ------------ 
-database.ref().on("child_added", function (child) {
-  // console.log(child.val().ingrList)
-});
-
-// ----------- Firebase logic for landing page ------------ 
-// firebase.auth().onAuthStateChanged(function (user) {
-//   window.user = user
-// });
-
-// New User Sign Up function
-function userSignIn (){
-  if (firebase.auth().currentUser) {
-    // [START signout]
-    firebase.auth().signOut();
-    // [END signout]
-  } else {
-    var email = $("#email").val();
-    console.log(email);
-    var password = $("#password").val();
-    console.log(password);
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode)
-      console.log(errorMessage)
-    });
-  }
-}
-
-// Adds User to Database
-function writeUserData(userId, email) {
-  firebase.database().ref('users/' + userId).set({
-    email: email,
-    id: userId
-  });
-  console.log("added user to firebase" + userId);
-}
-
-// User sign in function
-function newUserSignUp (){
-  var email = $("#newUserEmail").val();
-  console.log(email);
-  var password = $("#newUserPassword").val();
-  console.log(password);
-  
-  // Runs the firebase auth sign function
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
-    } else {
-      alert(errorMessage);
-    }
-    console.log(error);
-  });
-  console.log("user added");
-  var userID = firebase.auth().currentUser.uid;
-  console.log("new user ID: " + userID);
-    // writeUserData(userID, email);
-};
-
-// function initApp() {
-//   // Listening for auth state changes.
-//   // [START authstatelistener]
-//   firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//       // User is signed in.
-//       var email = user.email;
-//       currentUserId = user.uid;
-//       console.log(email);
-//       console.log("user ID: " + currentUserId);
-//     }
-//   });
-// };
-
-// window.onload = function () {
-//   initApp();
-// };
-
 
