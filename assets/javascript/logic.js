@@ -3,29 +3,12 @@
 // Example of an API query for ingredients chicken, mushrooms, garlic
 // https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDQtEqo93MUEgnY0AngvOsfshKbMH8ChA4",
-  authDomain: "crumbs-243103.firebaseapp.com",
-  databaseURL: "https://crumbs-243103.firebaseio.com",
-  projectId: "crumbs-243103",
-  storageBucket: "crumbs-243103.appspot.com",
-  messagingSenderId: "68338396052",
-  appId: "1:68338396052:web:2d602427a8bff86c"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-var database = firebase.database();
-
-
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
-
-var currentUserId;
 
 
 // --------firebase logic for user----------
@@ -40,16 +23,12 @@ $(document).on("click", "#signIn", function (event) {
   userSignIn()
 });
 
-
-
-
 // Sign Out Function
 $(document).on("click", "#signOut", function(event){
 event.preventDefault();
 firebase.auth().signOut();
 console.log("user signed out")
 })
-
 
 // Click handler for ingredients submit button
 $(".ingrSubmit").on("click", function(e) {
@@ -72,15 +51,13 @@ $(".ingrSubmit").on("click", function(e) {
 
   // Gets current firebase user
   var user = firebase.auth().currentUser;
-  console.log(user);
   var uid;
   if (user != null) {
     uid = user.uid;
   }
-  console.log("user" + uid)
  
   // Adds ingrArray to the Firebase
-  database.ref().push({
+  firebase.database().ref('user-ingrList/' + uid).push({
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
@@ -218,86 +195,4 @@ $(document).on("click", "#deleteIngr", function(e) {
 // Divide up the code
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
-
-// ----------- Firebase logic ------------ 
-database.ref().on("child_added", function (child) {
-  // console.log(child.val().ingrList)
-});
-
-// ----------- Firebase logic for landing page ------------ 
-// firebase.auth().onAuthStateChanged(function (user) {
-//   window.user = user
-// });
-
-// New User Sign Up function
-function userSignIn (){
-  if (firebase.auth().currentUser) {
-    // [START signout]
-    firebase.auth().signOut();
-    // [END signout]
-  } else {
-    var email = $("#email").val();
-    console.log(email);
-    var password = $("#password").val();
-    console.log(password);
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode)
-      console.log(errorMessage)
-    });
-  }
-}
-
-// Adds User to Database
-function writeUserData(userId, email) {
-  firebase.database().ref('users/' + userId).set({
-    email: email,
-    id: userId
-  });
-  console.log("added user to firebase" + userId);
-}
-
-// User sign in function
-function newUserSignUp (){
-  var email = $("#newUserEmail").val();
-  console.log(email);
-  var password = $("#newUserPassword").val();
-  console.log(password);
-  
-  // Runs the firebase auth sign function
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
-    } else {
-      alert(errorMessage);
-    }
-    console.log(error);
-  });
-  console.log("user added");
-  var userID = firebase.auth().currentUser.uid;
-  console.log("new user ID: " + userID);
-    // writeUserData(userID, email);
-};
-
-// function initApp() {
-//   // Listening for auth state changes.
-//   // [START authstatelistener]
-//   firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//       // User is signed in.
-//       var email = user.email;
-//       currentUserId = user.uid;
-//       console.log(email);
-//       console.log("user ID: " + currentUserId);
-//     }
-//   });
-// };
-
-// window.onload = function () {
-//   initApp();
-// };
-
 
