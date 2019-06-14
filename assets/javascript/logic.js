@@ -54,7 +54,6 @@ $(".ingrSubmit").on("click", function(e) {
   ingrArray = ingrSearch.split(',');
   console.log(ingrArray)
 
-
 // Create div and list out every ingredient
 for (i=0; i<ingrArray.length; i++) {
   var ingrDiv = $('<div/>', {
@@ -162,7 +161,6 @@ $(document).on("click", "#deleteIngr", function (e) {
   ingrSearch = ingrArray.toString();
   console.log(ingrSearch);
 
-
   // Add ingredient to Save for Later list
   var saveIngr = $('<li/>', {
     text: ingrVal,
@@ -205,10 +203,3 @@ $(document).on("click", "#deleteIngr", function (e) {
 
 });
 
-
-// TO DO: 
-
-// Put div 
-
-// Make exception cases for if user puts in , at the end of ingredient list
-// Duplicated ingredients
