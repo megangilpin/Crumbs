@@ -31,6 +31,37 @@
 </head>
 <body>
 
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="px-4 py-3">
+            <div class="form-group">
+              <label for="exampleDropdownFormEmail1">Email address</label>
+              <input type="email" class="form-control" id="newUserEmail" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="exampleDropdownFormPassword1">Password</label>
+              <input type="password" class="form-control" id="newUserPassword" placeholder="Password">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="signUpBtn" class="btn btn-outline-dark" data-dismiss="modal">Sign Up</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- Youtube Search Modal -->
   <div class="modal fade youtubeSearch" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
@@ -50,7 +81,7 @@
                 <label for="youtube-search">Teach Me: </label>
                 <input type="text" id="videoSearchWord" placeholder="How to ...">
                 <br>
-                <!-- Button triggers new movie to be added -->
+                <!-- Button triggers youtube videos to be added -->
                 <p><a href="#" role="button" class="my-3 youtubeSubmit btn btn-outline-dark">Submit</a></p>
               </form>
                  <div class="videoList row d-flex flex-wrap" id="player">
@@ -89,7 +120,7 @@
           Login
         </button>
         <div class="dropdown-menu my-4">
-          <form class="px-2 py-3">
+          <form class="px-2 py-2">
             <div class="form-group">
               <label for="exampleDropdownFormEmail1">Email address</label>
               <input type="email" class="form-control" id="email" placeholder="email@example.com">
@@ -98,14 +129,14 @@
               <label for="exampleDropdownFormPassword1">Password</label>
               <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <button id="signIn" type="submit" class="drop-down-item btn btn-outline-dark">Sign in</button>
+            <button id="signIn" type="submit" class="my-2 drop-down-item btn btn-outline-dark">Sign in</button>
             <button id="signOut" type="submit" class="drop-down-item btn btn-outline-dark">Sign out</button>
           </form>
           <div class="dropdown-divider"></div>
             <!-- Button trigger modal -->
-            <!-- <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
+            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
               New User? Sign Up!
-            </a> -->
+            </a>
           </div>
         </div>
       </div> <!-- end of login dropdown button -->
