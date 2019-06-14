@@ -202,4 +202,3 @@ $(document).on("click", "#deleteIngr", function (e) {
   $(".recipeList").empty;
 
 });
-

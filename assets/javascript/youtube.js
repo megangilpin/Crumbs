@@ -2,7 +2,7 @@
 // https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=AIzaSyBzH4JnmP45CC6QFbbVssIXlq2r9CTlPIs
 
 // Initialize query string
-var baseQuery = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=";
+var baseQuery = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=";
 var apiKey = "AIzaSyDdY_PkCpGRYJeaUMSwjIMui3eNH_WQj5Y"; 
 var videoSearch = "";
 
@@ -39,12 +39,13 @@ function appendVideos(array){
       id: "ytplayer",
       class: "my-3 mx-2",
       type: "text/html",
-    }).appendTo('.inspoList');
+    }).appendTo('.videoList');
   }
 }
 
 // On click listener to run the apiCall() function 
-$(".btn").on("click", function (event) {
+$(".youtubeSubmit").on("click", function (event) {
   event.preventDefault();
+  $(".videoList").empty();
   apiCall();
 });
