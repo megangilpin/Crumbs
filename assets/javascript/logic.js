@@ -9,6 +9,7 @@ var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
+var saveArray = [];
 
 
 // --------firebase logic for user----------
@@ -53,22 +54,6 @@ $(".ingrSubmit").on("click", function(e) {
   ingrArray = ingrSearch.split(',');
   console.log(ingrArray)
 
-  // Gets current firebase user
-  var user = firebase.auth().currentUser;
-  var uid;
-  if (user != null) {
-    uid = user.uid;
-  }
- 
-  // Adds ingrArray to the Firebase
-  firebase.database().ref('user-ingrList/' + uid).push({
-    ingrList: ingrArray,
-    dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
-  
-  console.log("firebase fired")
-
-  // console.log("firebase fired")
 
 // Create div and list out every ingredient
 for (i=0; i<ingrArray.length; i++) {
@@ -90,34 +75,15 @@ for (i=0; i<ingrArray.length; i++) {
     ingrDiv.append(ingrSpan);
     $("#fridgeIngredients").append(ingrDiv);
   };
-
-  // API call
-  runRecipes(ingrSearch);
 });
 
-// Click handler to delete ingredients
-$(document).on("click", "#deleteIngr", function (e) {
+// Click handler to run recipe
+$(".runRecipes").on("click", function(e) {
   e.preventDefault();
 
-  // Grab removed ingredient and remove from array
-  var ingrVal = $(this).closest("div").attr("value");
-  console.log(ingrVal);
-  var ingrPos = ingrArray.indexOf(ingrVal);
-  console.log(ingrPos);
-  ingrArray.splice(ingrPos, 1);
-  console.log(ingrArray);
-
-  // Remove div of item
-  $(this).closest("div").remove();
-
-  ingrSearch = ingrArray.toString();
-  console.log(ingrSearch);
-
-  // Empty recipes div
-  $(".recipeList").empty;
-
-  // Recall API to retrieve recipes
+  // Run API
   runRecipes(ingrSearch);
+
 });
 
 // Function to call API & run recipes
@@ -152,9 +118,6 @@ function runRecipes(ingrSearch) {
         // console.log(ingrListArray);
 
         var recipeIngrs = $("<span>").text("Ingredients: " + getIngr);
-          // for (var j = 0; j < ingrListArray.length; j++) {
-          //   var recipeIngrs = $("<ul>").text("Ingredients: " + getIngr);
-          // };
 
         // Create anchor tag for the recipeDiv
         var recipeAnchor = $("<a>");
@@ -179,26 +142,73 @@ function runRecipes(ingrSearch) {
 
 };
 
-// Click handler for removing ingredient(s)
-$(document).on("click", "#deleteIngr", function(e) {
+// Click handler to remove ingredient(s)
+$(document).on("click", "#deleteIngr", function (e) {
   e.preventDefault();
-  console.log(this);
 
   // Grab removed ingredient and remove from array
   var ingrVal = $(this).closest("div").attr("value");
-  console.log (ingrVal);
+  console.log(ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
   console.log(ingrPos);
+  saveArray.push(ingrVal);
+  console.log("SaveArray: " + saveArray);
   ingrArray.splice(ingrPos, 1);
   console.log(ingrArray);
-  
+
   // Remove div of item
   $(this).closest("div").remove();
 
+  ingrSearch = ingrArray.toString();
+  console.log(ingrSearch);
+
+
+  // Add ingredient to Save for Later list
+  var saveIngr = $('<li/>', {
+    text: ingrVal,
+    class: 'list-group-item',
+    value: ingrVal
+  });
+
+  //save button for save for later ingr list
+  $(".saveIngrSubmit").on("click", function(e) {
+    e.preventDefault();
+  
+    // Clear out previous list of saved ingredients
+    $(".savedIngrList").empty();
+  
+    // List out searched ingredients
+    // Save string of all ingredients in an array
+    ingrArray = saveArray
+    console.log("ingrArray: " + ingrArray)
+  
+    // Gets current firebase user
+    var user = firebase.auth().currentUser;
+    var uid;
+    if (user != null) {
+      uid = user.uid;
+    }
+   
+    // Adds ingrSaveArray to the Firebase
+    firebase.database().ref('user-ingrList' + uid).push({
+      ingrList: ingrArray,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+  });
+  console.log("firebased saved")
+
+  // Append span to div
+  $(".savedIngrList").append(saveIngr);
+  
+  // Empty recipes div
+  $(".recipeList").empty;
+
 });
 
+
 // TO DO: 
-// Divide up the code
+
+// Put div 
+
 // Make exception cases for if user puts in , at the end of ingredient list
 // Duplicated ingredients
-
