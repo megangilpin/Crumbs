@@ -11,7 +11,15 @@
     <link rel="stylesheet" href="assets/css/reset.css">
 
     <!--BOOSTRAP-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!--FONTS-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700|Roboto:400,700&display=swap" rel="stylesheet">
@@ -20,6 +28,38 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
+  <!-- Youtube Search Modal -->
+  <div class="modal fade youtubeSearch" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="container-fluid">
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <form>
+                <label for="youtube-search">Teach Me: </label>
+                <input type="text" id="videoSearchWord" placeholder="How to ...">
+                <br>
+                <!-- Button triggers new movie to be added -->
+                <p><a href="#" role="button" class="my-3 youtubeSubmit btn btn-outline-dark">Submit</a></p>
+              </form>
+              <div class="videoList row d-flex flex-wrap" id="player">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!--Header / Navbar-->
 
   <nav class="navbar navbar-expand-lg" style="background-color: #A8D0E6;">
@@ -37,9 +77,39 @@
           <a class="nav-link" href="takeout.html">Take Out</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="youtube.html">Learn</a>
+          <a class="nav-link" data-toggle="modal" data-target=".youtubeSearch">
+          Learn
         </li>
       </ul>
+
+      <!-- Login/logout dropdown button -->
+      <div class="btn-group dropleft">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Login
+        </button>
+        <div class="dropdown-menu my-4">
+          <form class="px-2 py-3">
+            <div class="form-group">
+              <label for="exampleDropdownFormEmail1">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="exampleDropdownFormPassword1">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button id="signIn" type="submit" class="drop-down-item btn btn-outline-dark mb-2">Sign in</button>
+            <button id="signOut" type="submit" class="drop-down-item btn btn-outline-dark">Sign out</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <!-- Button trigger modal -->
+          <!-- <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter">
+                    New User? Sign Up!
+                  </a> -->
+        </div>
+      </div>
+      </div> <!-- end of login dropdown button -->
+
     </div>
   </nav>
 
@@ -100,8 +170,11 @@
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!-- Youtube Search jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!-- JS file -->
 <script type="text/javascript" src="assets/javascript/zomato.js"></script>
+<script type="text/javascript" src="assets/javascript/youtube.js"></script>
 
 </body>
 </html>
