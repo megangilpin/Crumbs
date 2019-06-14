@@ -41,8 +41,6 @@ $(document).on("click", "#signIn", function (event) {
 });
 
 
-
-
 // Sign Out Function
 $(document).on("click", "#signOut", function(event){
 event.preventDefault();
@@ -60,7 +58,7 @@ $(".ingrSubmit").on("click", function(e) {
 
   // Grab list of ingredients from user input
   ingrSearch = $("#ingredientList").val().trim();
-  console.log(ingrSearch);
+  console.log("ingrSearch " + ingrSearch);
   
   // Clear out text box
   $("#ingredientList").empty();
@@ -68,7 +66,7 @@ $(".ingrSubmit").on("click", function(e) {
   // List out searched ingredients
   // Save string of all ingredients in an array
   ingrArray = ingrSearch.split(',');
-  console.log(ingrArray)
+  console.log("ingrArray " + ingrArray)
 
   // Gets current firebase user
   var user = firebase.auth().currentUser;
@@ -84,6 +82,8 @@ $(".ingrSubmit").on("click", function(e) {
     ingrList: ingrArray,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
   });
+
+  // console.log("ingrList Firebase " + ingrList)
   
   console.log("firebase fired")
 
@@ -120,17 +120,17 @@ $(document).on("click", "#deleteIngr", function (e) {
 
   // Grab removed ingredient and remove from array
   var ingrVal = $(this).closest("div").attr("value");
-  console.log(ingrVal);
+  console.log("ingrVal " + ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
-  console.log(ingrPos);
+  console.log("ingrPos " + ingrPos);
   ingrArray.splice(ingrPos, 1);
-  console.log(ingrArray);
+  console.log("ingrArray" + ingrArray);
 
   // Remove div of item
   $(this).closest("div").remove();
 
   ingrSearch = ingrArray.toString();
-  console.log(ingrSearch);
+  console.log("ingrSearch " + ingrSearch);
 
   // Empty recipes div
   $(".recipeList").empty;
