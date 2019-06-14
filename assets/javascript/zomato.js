@@ -37,11 +37,8 @@ $(document).ready(function() {
    $.getJSON(settings, function(data) {
  
     data = data.restaurants;
-<<<<<<< HEAD
     var html = ""; //creating html variable so that i can create the html to add to the div below 
-=======
     var newHtml = ""; //creating html variable so that i can create the html to add to the div below 
->>>>>>> 904e5b239fb44aaf92a0e21cd8094441b46e4637
  
     $.each(data, function(index, value) {
  
@@ -51,7 +48,6 @@ $(document).ready(function() {
         var userRating = x.restaurant.user_rating;
 
 //adding html to the html var
-<<<<<<< HEAD
         html += "<div class='data img-rounded'>"; //image class started
         html += "<div class='rating'>"; //rating class
 
@@ -78,7 +74,6 @@ $(document).ready(function() {
      });
     });
     $(".message").html(html); //adding to the message div 
-=======
         newHtml += "<div class='data img-rounded'>"; //image class started
         newHtml += "<div class='rating'>"; //rating class
 
@@ -105,7 +100,6 @@ $(document).ready(function() {
      });
     });
     $(".message").html(newHtml); //adding to the message div 
->>>>>>> 904e5b239fb44aaf92a0e21cd8094441b46e4637
    });
  
   }
