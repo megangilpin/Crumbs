@@ -68,8 +68,6 @@ $(".ingrSubmit").on("click", function(e) {
   
   console.log("firebase fired")
 
-  // console.log("firebase fired")
-
 // Create div and list out every ingredient
 for (i=0; i<ingrArray.length; i++) {
   var ingrDiv = $('<div/>', {
@@ -90,34 +88,15 @@ for (i=0; i<ingrArray.length; i++) {
     ingrDiv.append(ingrSpan);
     $("#fridgeIngredients").append(ingrDiv);
   };
-
-  // API call
-  runRecipes(ingrSearch);
 });
 
-// Click handler to delete ingredients
-$(document).on("click", "#deleteIngr", function (e) {
+// Click handler to run recipe
+$(".runRecipes").on("click", function(e) {
   e.preventDefault();
 
-  // Grab removed ingredient and remove from array
-  var ingrVal = $(this).closest("div").attr("value");
-  console.log(ingrVal);
-  var ingrPos = ingrArray.indexOf(ingrVal);
-  console.log(ingrPos);
-  ingrArray.splice(ingrPos, 1);
-  console.log(ingrArray);
-
-  // Remove div of item
-  $(this).closest("div").remove();
-
-  ingrSearch = ingrArray.toString();
-  console.log(ingrSearch);
-
-  // Empty recipes div
-  $(".recipeList").empty;
-
-  // Recall API to retrieve recipes
+  // Run API
   runRecipes(ingrSearch);
+
 });
 
 // Function to call API & run recipes
@@ -152,9 +131,6 @@ function runRecipes(ingrSearch) {
         // console.log(ingrListArray);
 
         var recipeIngrs = $("<span>").text("Ingredients: " + getIngr);
-          // for (var j = 0; j < ingrListArray.length; j++) {
-          //   var recipeIngrs = $("<ul>").text("Ingredients: " + getIngr);
-          // };
 
         // Create anchor tag for the recipeDiv
         var recipeAnchor = $("<a>");
@@ -179,26 +155,33 @@ function runRecipes(ingrSearch) {
 
 };
 
-// Click handler for removing ingredient(s)
-$(document).on("click", "#deleteIngr", function(e) {
+// Click handler to remove ingredient(s)
+$(document).on("click", "#deleteIngr", function (e) {
   e.preventDefault();
-  console.log(this);
 
   // Grab removed ingredient and remove from array
   var ingrVal = $(this).closest("div").attr("value");
-  console.log (ingrVal);
+  console.log(ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
   console.log(ingrPos);
   ingrArray.splice(ingrPos, 1);
   console.log(ingrArray);
-  
+
   // Remove div of item
   $(this).closest("div").remove();
 
-});
+  ingrSearch = ingrArray.toString();
+  console.log(ingrSearch);
 
-// TO DO: 
-// Divide up the code
-// Make exception cases for if user puts in , at the end of ingredient list
-// Duplicated ingredients
+  // Add ingredient to Save for Later list
+  var saveIngr = $('<li/>', {
+    text: ingrVal,
+    class: 'list-group-item',
+    value: ingrVal
+  });
 
+  // Append span to div
+  $(".savedIngrList").append(saveIngr);
+  
+  // Empty recipes div
+  $(".recipeList").empty;
