@@ -97,6 +97,9 @@ $(".ingrSubmit").on("click", function(e) {
 $(".runRecipes").on("click", function(e) {
   e.preventDefault();
 
+  // Empty recipes div
+  $(".recipeList").empty();
+
   // Run API
   runRecipes(ingrSearch);
 
