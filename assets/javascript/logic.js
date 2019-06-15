@@ -210,7 +210,52 @@ $(document).on("click", "#deleteIngr", function (e) {
 
   //firebase stored ingr display page on load 
 
+  $(".freezerBtn").on("click", function(e) {
+    e.preventDefault();
+  
+    // Clear out previous list of saved ingredients
+    $(".savedIngrList").empty();
+  
+    // List out searched ingredients
+    // Save string of all ingredients in an array
+    ingrArray = saveArray
+    console.log("ingrArray2: " + ingrArray)
 
+    // Gets current firebase user global function 
+    var user = firebase.auth().currentUser;
+    var uid;
+    if (user != null) {
+      uid = user.uid;
+    }
+    console.log(uid);  
+   
+    // Adds ingrSaveArray to the Firebase
+    firebase.database().ref('user-ingrList' + uid).push({
+      ingrList: ingrArray,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+
+    for (i=0; i<ingrArray.length; i++) {
+      var freezeDiv = $('<div/>', {
+        text: ingrArray[i],
+        id: 'freezeDiv'+i,
+        class: 'list-item',
+        value: ingrArray[i]
+      });
+  
+      // Create span to delete
+      var ingrSpan = $('<span/>', {
+        text: 'X',
+        id: 'deleteIngr',
+        class: 'list-delete-btn',
+        value: ingrArray[i],
+      });
+  
+      // Append span to div
+      freezeDiv.append(ingrSpan);
+        $("#fridgeIngredients").append(freezeDiv);
+      };
+  });
 
   
   console.log("firebased saved")
