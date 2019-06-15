@@ -1,5 +1,8 @@
 // Recipe Search Page
 
+// Example of an API query for ingredients chicken, mushrooms, garlic
+// https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
+$(document).ready(function() {
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
@@ -189,13 +192,14 @@ $(document).on("click", "#deleteIngr", function (e) {
     // Save string of all ingredients in an array
     ingrArray = saveArray
     console.log("ingrArray: " + ingrArray)
-  
-    // Gets current firebase user
+
+    // Gets current firebase user global function 
     var user = firebase.auth().currentUser;
     var uid;
     if (user != null) {
       uid = user.uid;
     }
+    console.log(uid);  
    
     // Adds ingrSaveArray to the Firebase
     firebase.database().ref('user-ingrList' + uid).push({
@@ -203,6 +207,12 @@ $(document).on("click", "#deleteIngr", function (e) {
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
   });
+
+  //firebase stored ingr display page on load 
+
+
+
+  
   console.log("firebased saved")
 
   // Append span to div
@@ -211,4 +221,5 @@ $(document).on("click", "#deleteIngr", function (e) {
   // Empty recipes div
   $(".recipeList").empty;
 
+  });
 });
