@@ -15,13 +15,23 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <!--BOOSTRAP-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
     <!--FONTS-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700|Roboto:400,700&display=swap" rel="stylesheet">
     <!--CUSTOM CSS-->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  
 <!--Header / Navbar-->
 <nav class="navbar navbar-expand-lg" style="background-color: #A8D0E6;">
     <a class="navbar-brand" href="recipe.html"><img src="assets/image/logo.png" height='80' width='80'></a>
@@ -49,7 +59,7 @@
         <!--input form for ingredients-->
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
-              <div class="card-header"  style="background-color: #A8D0E6;">
+              <div class="card-header text-center"  style="background-color: #A8D0E6;">
                 <h2><label for="ingredients">What's in Your Fridge?</label></h2>
               </div>
               <form>
@@ -64,18 +74,19 @@
         <!-- Displays list of Ingredients in Fridge -->
         <div class="col-12 col-md-8">
 
-          <div class="row jumbotron p-4">
-            <div class="col-12">
-                <div class="row justify-content-center">
-                    <h2 class="mb-3">List of Ingredients</h2>
-                </div>
-                <div class="row">
-                    <div id="fridgeIngredients">
+          <div class="row jumbotron p-4 justify-content-center">
+              <div class="d-flex flex-column justify-content-center">
+                  <div>
+                      <h2 class="mb-3 text-center">Cutting Board</h2>
                   </div>
-                  <center><button type="submit" class="btn runRecipes btn-outline-dark my-1">Let's See Them Recipes</button></center>
-                </div>
+                  <div>
+                    <!-- <h3 class="mb-3 text-center">Ingredients</h3> -->
+                    <div id="fridgeIngredients"></div>
+                    <center><button type="submit" class="btn runRecipes btn-outline-dark my-1">Let's See Them Recipes</button></center>
+                  </div>
+              </div>
             </div>
-          </div>
+
         </div>
     </div>
 
@@ -84,11 +95,12 @@
         <!--Links to other pages-->
         <div class="col-6 col-md-4">
             <div class="card" style="width: 18rem;">
-                <div class="card-header" style="background-color: #A8D0E6;">
+                <div class="card-header text-center" style="background-color: #A8D0E6;">
                     <h3>Save for Later</h3>
                 </div>
                 <ul class="savedIngrList list-group list-group-flush">
                 </ul>
+                <center><button type="submit" class="btn saveIngrSubmit btn-outline-dark my-1">Save</button></center>
             </div>
         </div>
 

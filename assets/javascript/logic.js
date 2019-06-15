@@ -1,15 +1,11 @@
 // Recipe Search Page
 
-// Example of an API query for ingredients chicken, mushrooms, garlic
-// https://api.edamam.com/search?q=chicken,garlic,mushrooms&app_id=a2545d79&app_key=f43e58c104b981cd9a7ef77393c1cbad
-
 // Initialize query string
 var baseQuery = "https://api.edamam.com/search?q=";
 var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
-
 
 // --------firebase logic for user----------
 // On click event for the Sign In button
@@ -44,7 +40,7 @@ $(".ingrSubmit").on("click", function(e) {
   // Grab list of ingredients from user input
   ingrSearch = $("#ingredientList").val().trim();
   console.log(ingrSearch);
-  
+
   // Clear out text box
   $("#ingredientList").empty();
 
@@ -59,7 +55,7 @@ $(".ingrSubmit").on("click", function(e) {
   if (user != null) {
     uid = user.uid;
   }
- 
+
   // Adds ingrArray to the Firebase
   firebase.database().ref('user-ingrList/' + uid).push({
     ingrList: ingrArray,
@@ -68,26 +64,27 @@ $(".ingrSubmit").on("click", function(e) {
   
   console.log("firebase fired")
 
-// Create div and list out every ingredient
-for (i=0; i<ingrArray.length; i++) {
-  var ingrDiv = $('<div/>', {
-    text: ingrArray[i],
-    id: 'ingrDiv'+i,
-    class: 'list-item',
-    value: ingrArray[i]
-  });
+  // Create div and list out every ingredient
+  for (i=0; i<ingrArray.length; i++) {
+    var ingrDiv = $('<div/>', {
+      text: ingrArray[i],
+      id: 'ingrDiv'+i,
+      class: 'list-item',
+      value: ingrArray[i]
+    });
 
-  // Create span to delete
-  var ingrSpan = $('<span/>', {
-    text: 'X',
-    id: 'deleteIngr',
-    class: 'list-delete-btn',
-    value: ingrArray[i],
-  });
-  // Append span to div
-    ingrDiv.append(ingrSpan);
-    $("#fridgeIngredients").append(ingrDiv);
-  };
+    // Create span to delete
+    var ingrSpan = $('<span/>', {
+      text: 'X',
+      id: 'deleteIngr',
+      class: 'list-delete-btn',
+      value: ingrArray[i],
+    });
+
+    // Append span to div
+      ingrDiv.append(ingrSpan);
+      $("#fridgeIngredients").append(ingrDiv);
+    };
 });
 
 // Click handler to run recipe
@@ -118,19 +115,17 @@ function runRecipes(ingrSearch) {
       for (var i = 0; i < numRecipes; i++) {
 
         // Create div to dynamically list recipes
-        var recipeDiv = $("<div>");
+        var recipeDiv = $("<div class='mb-5'>");
         // Label tag for recipes
-        var recipeLabel = $("<h3>").text(response.hits[i].recipe.label);
+        var recipeLabel = $("<h3 class='text-center'>").text(response.hits[i].recipe.label);
         // Image tag for recipes
         var recipeImg = $("<img class='resimg img-round'>");
         recipeImg.attr("src",response.hits[i].recipe.image);
 
         // List ingredients  
-        var getIngr = response.hits[i].recipe.ingredientLines;      
-        // var ingrListArray = getIngr.split(',');
-        // console.log(ingrListArray);
+        var getIngr = response.hits[i].recipe.ingredientLines;
 
-        var recipeIngrs = $("<span>").text("Ingredients: " + getIngr);
+        var recipeIngrs = $("<span class='ingredients'>").text("Ingredients: " + getIngr);
 
         // Create anchor tag for the recipeDiv
         var recipeAnchor = $("<a>");
@@ -139,20 +134,18 @@ function runRecipes(ingrSearch) {
         recipeAnchor.attr("target", "_blank")
         console.log(response.hits[i].recipe.url); 
 
+        // Append label to the recipeAnchor
+        recipeAnchor.append(recipeLabel);
+
         // Append label, image, ingredients to the recipe div
-        recipeDiv.append(recipeLabel);
+        recipeDiv.append(recipeAnchor);
         recipeDiv.append(recipeImg);
         recipeDiv.append(recipeIngrs);
         
-        // Append div recipeDiv to the recipeAnchor
-        recipeAnchor.append(recipeDiv);
-
         // Adding the button to the HTML
-        $(".recipeList").append(recipeAnchor);
+        $(".recipeList").append(recipeDiv);
       };
-
   });
-
 };
 
 // Click handler to remove ingredient(s)
@@ -187,12 +180,3 @@ $(document).on("click", "#deleteIngr", function (e) {
   $(".recipeList").empty;
 
 });
-
-
-// TO DO: 
-
-// Put div 
-
-// Make exception cases for if user puts in , at the end of ingredient list
-// Duplicated ingredients
-
