@@ -6,6 +6,7 @@ var apiKey = "f43e58c104b981cd9a7ef77393c1cbad";
 var appId = "a2545d79";
 var ingrSearch = "";
 var ingrArray = [];
+var saveArray = [];
 
 // --------firebase logic for user----------
 // On click event for the Sign In button
@@ -49,6 +50,7 @@ $(".ingrSubmit").on("click", function(e) {
   ingrArray = ingrSearch.split(',');
   console.log(ingrArray)
 
+
   // Gets current firebase user
   var user = firebase.auth().currentUser;
   var uid;
@@ -85,6 +87,7 @@ $(".ingrSubmit").on("click", function(e) {
       ingrDiv.append(ingrSpan);
       $("#fridgeIngredients").append(ingrDiv);
     };
+
 });
 
 // Click handler to run recipe
@@ -157,6 +160,8 @@ $(document).on("click", "#deleteIngr", function (e) {
   console.log(ingrVal);
   var ingrPos = ingrArray.indexOf(ingrVal);
   console.log(ingrPos);
+  saveArray.push(ingrVal);
+  console.log("SaveArray: " + saveArray);
   ingrArray.splice(ingrPos, 1);
   console.log(ingrArray);
 
@@ -172,6 +177,33 @@ $(document).on("click", "#deleteIngr", function (e) {
     class: 'list-group-item',
     value: ingrVal
   });
+
+  //save button for save for later ingr list
+  $(".saveIngrSubmit").on("click", function(e) {
+    e.preventDefault();
+  
+    // Clear out previous list of saved ingredients
+    $(".savedIngrList").empty();
+  
+    // List out searched ingredients
+    // Save string of all ingredients in an array
+    ingrArray = saveArray
+    console.log("ingrArray: " + ingrArray)
+  
+    // Gets current firebase user
+    var user = firebase.auth().currentUser;
+    var uid;
+    if (user != null) {
+      uid = user.uid;
+    }
+   
+    // Adds ingrSaveArray to the Firebase
+    firebase.database().ref('user-ingrList' + uid).push({
+      ingrList: ingrArray,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+  });
+  console.log("firebased saved")
 
   // Append span to div
   $(".savedIngrList").append(saveIngr);
