@@ -73,6 +73,7 @@ $(document).ready(function() {
      });
     });
     $(".message").html(newHtml); //adding to the message div 
+    console.log(newHtml);
    });
  
   }
