@@ -44,9 +44,9 @@ function newUserSignUp() {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
+      console.log('Wrong password.');
     } else {
-      alert(errorMessage);
+      console.log(errorMessage);
     }
     console.log(error);
   });
