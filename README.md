@@ -1,8 +1,11 @@
-# Crumbs
-Crumbs is a website designed for the modern, busy cook who needs to whip up a delicious meal with the ingridents they have on hand. Enter the ingredients you already have and generate recipe results. The user can also search tutorial videos if they have any questions on how to prepare the meal. If cooking ends up being too much, you can find nearby restaurants based on current cravings nearby.
-
-# Live Link
+# Crumbs :cookie:
 https://crumbs-243103.firebaseapp.com
+
+![Crumbs Demo](demo/crumsmed.gif)
+
+### Overview
+
+Crumbs is a website designed for the modern, busy cook who needs to whip up a delicious meal with the ingredients they have on hand. Enter the ingredients you already have and generate recipe results. The user can also search tutorial videos if they have any questions on how to prepare the meal. If cooking ends up being too much, you can find nearby restaurants based on current cravings nearby.
 
 ## Built With
 * Firebase
